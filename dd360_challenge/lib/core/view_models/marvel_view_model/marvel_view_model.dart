@@ -14,7 +14,7 @@ class MarvelViewModel extends Cubit<MarvelState> {
   void fetchHeros(int offset) async {
     emit(state.copyWith(loadingData: true));
 
-    final MarvelResponseModel response = await _heroInterfaceImpl.getHeros(
+    final CharacterResponseModel response = await _heroInterfaceImpl.getHeros(
       offset,
     );
 
@@ -24,7 +24,7 @@ class MarvelViewModel extends Cubit<MarvelState> {
   void fetchMoreHeros(int offset) async {
     emit(state.copyWith(loadingMoreData: true));
 
-    final MarvelResponseModel response = await _heroInterfaceImpl.getHeros(
+    final CharacterResponseModel response = await _heroInterfaceImpl.getHeros(
       offset,
     );
 
@@ -37,5 +37,9 @@ class MarvelViewModel extends Cubit<MarvelState> {
     }
 
     emit(state.copyWith(loadingMoreData: false));
+  }
+
+  void selectedHero(HeroModel hero) {
+    emit(state.copyWith(selectedHero: hero));
   }
 }

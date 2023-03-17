@@ -31,18 +31,6 @@ class _ListHerosMarvelState extends State<ListHerosMarvel> {
     super.dispose();
   }
 
-  void listenerScroll() {
-    final marvelvm = context.read<MarvelViewModel>();
-
-    final bool isEnd = _scrollController.position.pixels >=
-        (_scrollController.position.maxScrollExtent - 150);
-    if (isEnd && !marvelvm.state.loadingMoreData) {
-      _currentOffSet += 1;
-
-      marvelvm.fetchMoreHeros(_currentOffSet);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final double paddingBottom = MediaQuery.of(context).padding.bottom;
@@ -72,10 +60,15 @@ class _ListHerosMarvelState extends State<ListHerosMarvel> {
 
   Widget _buildItem(HeroModel hero, bool loading) {
     return GestureDetector(
+      onTap: () {
+        if (!loading) {
+          _onSelectedHero(hero);
+        }
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildImage(hero.thumbnail!, loading),
+          _buildImage(hero, loading),
           const SizedBox(height: 10),
           _buildName(hero.name!, loading),
         ],
@@ -85,21 +78,26 @@ class _ListHerosMarvelState extends State<ListHerosMarvel> {
 
   Widget _buildLoadingImage() => const LoadingWidget(height: 150);
 
-  Widget _buildImage(ThumbnailModel thumbnail, bool loading) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
-      clipBehavior: Clip.hardEdge,
-      child: AnimatedSwitcher(
-        duration: kThemeAnimationDuration,
-        child: loading
-            ? _buildLoadingImage()
-            : CachedNetworkImage(
-                imageUrl: "${thumbnail.path}.${thumbnail.extension}",
-                fit: BoxFit.cover,
-                alignment: Alignment.center,
-                progressIndicatorBuilder: (_, __, ___) => _buildLoadingImage(),
-                errorWidget: (_, __, ___) => const Icon(Icons.warning),
-              ),
+  Widget _buildImage(HeroModel hero, bool loading) {
+    return Hero(
+      tag: hero.id!,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        clipBehavior: Clip.hardEdge,
+        child: AnimatedSwitcher(
+          duration: kThemeAnimationDuration,
+          child: loading
+              ? _buildLoadingImage()
+              : CachedNetworkImage(
+                  imageUrl:
+                      "${hero.thumbnail!.path}.${hero.thumbnail!.extension}",
+                  fit: BoxFit.cover,
+                  alignment: Alignment.center,
+                  progressIndicatorBuilder: (_, __, ___) =>
+                      _buildLoadingImage(),
+                  errorWidget: (_, __, ___) => const Icon(Icons.warning),
+                ),
+        ),
       ),
     );
   }
@@ -111,11 +109,29 @@ class _ListHerosMarvelState extends State<ListHerosMarvel> {
           ? const LoadingWidget(height: 10)
           : Text(
               name,
+              maxLines: 2,
               style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
               ),
             ),
     );
+  }
+
+  void listenerScroll() {
+    final marvelvm = context.read<MarvelViewModel>();
+
+    final bool isEnd = _scrollController.position.pixels >=
+        (_scrollController.position.maxScrollExtent - 150);
+    if (isEnd && !marvelvm.state.loadingMoreData) {
+      _currentOffSet += 1;
+
+      marvelvm.fetchMoreHeros(_currentOffSet);
+    }
+  }
+
+  void _onSelectedHero(HeroModel hero) {
+    context.read<MarvelViewModel>().selectedHero(hero);
+    Navigator.of(context).pushNamed('/detailHero');
   }
 }

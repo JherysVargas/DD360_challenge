@@ -1,3 +1,12 @@
-export 'comic_model/hero_model.dart';
-export 'comic_model/thumbnail_model.dart';
-export 'comic_model/marvel_response_model.dart';
+export 'character_model/hero_model.dart';
+export 'character_model/character_response_model.dart';
+export 'url_model/url_model.dart';
+export 'thumbnail_model/thumbnail_model.dart';
+export 'comic_model/comic_model.dart';
+export 'comic_model/comic_response_model.dart';
+export 'event_model/event_model.dart';
+export 'event_model/event_response_model.dart';
+export 'serie_model/serie_model.dart';
+export 'serie_model/serie_response_model.dart';
+export 'story_model/story_model.dart';
+export 'story_model/story_response_model.dart';
