@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dd360_challenge/ui/home_view/home_view.dart';
+import 'package:dd360_challenge/ui/views/home_view/home_view.dart';
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

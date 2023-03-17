@@ -31,6 +31,7 @@ class HttpBaseProvider {
       "apikey": _publicKey,
       "hash": hashMD5,
       "ts": timeStamp,
+      "limit": 40,
       ...queryParameters,
     };
   }

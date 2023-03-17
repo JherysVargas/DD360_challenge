@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:dd360_challenge/models/models.dart';
 import 'package:dd360_challenge/core/utils/http_provider.dart';
-import 'package:dd360_challenge/models/comic_model/marvel_response_model.dart';
 
 import 'hero_interface.dart';
 

@@ -11,7 +11,7 @@ part 'hero_model.g.dart';
 
 @JsonSerializable()
 class HeroModel {
-  HeroModel({
+  const HeroModel({
     this.id = 0,
     this.name = '',
     this.description = '',

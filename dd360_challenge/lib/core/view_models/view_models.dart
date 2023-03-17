@@ -1,1 +1,1 @@
-export 'hero_view_model/hero_view_model.dart';
+export 'marvel_view_model/marvel_view_model.dart';
