@@ -8,7 +8,7 @@ part 'story_model.g.dart';
 @JsonSerializable()
 class StoryModel {
   StoryModel({
-    this.id = '',
+    this.id = 0,
     this.title = '',
     this.description = '',
     this.resourceUri = '',
@@ -17,11 +17,12 @@ class StoryModel {
     this.thumbnail = const ThumbnailModel(),
   });
 
+  final int? id;
   final ThumbnailModel? thumbnail;
-  final String? id, title, description, resourceUri, type, modified;
+  final String? title, description, resourceUri, type, modified;
 
   StoryModel copyWith({
-    String? id,
+    int? id,
     String? title,
     String? description,
     String? resourceUri,

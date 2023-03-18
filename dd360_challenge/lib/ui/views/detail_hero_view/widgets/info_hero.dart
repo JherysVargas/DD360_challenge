@@ -1,7 +1,7 @@
-import 'package:dd360_challenge/core/view_models/view_models.dart';
-import 'package:dd360_challenge/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dd360_challenge/models/models.dart';
+import 'package:dd360_challenge/core/view_models/view_models.dart';
 
 class InfoHero extends StatelessWidget {
   const InfoHero({super.key});
@@ -18,22 +18,32 @@ class InfoHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<MarvelViewModel, MarvelState, HeroModel>(
-      selector: (state) => state.selectedHero,
-      builder: (context, selectedHero) {
-        return SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          sliver: SliverToBoxAdapter(
-            child: Column(
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      sliver: SliverToBoxAdapter(
+        child: BlocSelector<MarvelViewModel, MarvelState, HeroModel>(
+          selector: (state) => state.selectedHero,
+          builder: (context, selectedHero) {
+            return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(selectedHero.name!, style: _textStyleName),
-                Text(selectedHero.description!, style: _textStyleDescription),
+                _buildName(selectedHero.name!),
+                const SizedBox(height: 10),
+                if (selectedHero.description!.isNotEmpty)
+                  _buildDescriptin(selectedHero.description!),
               ],
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
+  }
+
+  Widget _buildName(String name) {
+    return Text(name, style: _textStyleName);
+  }
+
+  Widget _buildDescriptin(String description) {
+    return Text(description, style: _textStyleDescription);
   }
 }

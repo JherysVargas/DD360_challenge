@@ -8,37 +8,27 @@ part 'serie_model.g.dart';
 @JsonSerializable()
 class SerieModel {
   SerieModel({
-    this.id = '',
+    this.id = 0,
     this.title = '',
     this.description = '',
     this.resourceUri = '',
     this.urls = const [],
-    this.startYear = '',
-    this.endYear = '',
     this.rating = '',
     this.modified = '',
     this.thumbnail = const ThumbnailModel(),
   });
 
+  final int? id;
   final List<UrlModel>? urls;
   final ThumbnailModel? thumbnail;
-  final String? id,
-      title,
-      description,
-      resourceUri,
-      startYear,
-      endYear,
-      rating,
-      modified;
+  final String? title, description, resourceUri, rating, modified;
 
   SerieModel copyWith({
-    String? id,
+    int? id,
     String? title,
     String? description,
     String? resourceUri,
     List<UrlModel>? urls,
-    String? startYear,
-    String? endYear,
     String? rating,
     String? modified,
     ThumbnailModel? thumbnail,
@@ -49,8 +39,6 @@ class SerieModel {
         description: description ?? this.description,
         resourceUri: resourceUri ?? this.resourceUri,
         urls: urls ?? this.urls,
-        startYear: startYear ?? this.startYear,
-        endYear: endYear ?? this.endYear,
         rating: rating ?? this.rating,
         modified: modified ?? this.modified,
         thumbnail: thumbnail ?? this.thumbnail,

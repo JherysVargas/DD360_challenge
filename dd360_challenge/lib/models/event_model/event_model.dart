@@ -8,7 +8,7 @@ part 'event_model.g.dart';
 @JsonSerializable()
 class EventModel {
   EventModel({
-    this.id = '',
+    this.id = 0,
     this.title = '',
     this.description = '',
     this.resourceUri = '',
@@ -19,12 +19,13 @@ class EventModel {
     this.thumbnail = const ThumbnailModel(),
   });
 
+  final int? id;
   final List<UrlModel>? urls;
   final ThumbnailModel? thumbnail;
-  final String? id, title, description, resourceUri, modified, start, end;
+  final String? title, description, resourceUri, modified, start, end;
 
   EventModel copyWith({
-    String? id,
+    int? id,
     String? title,
     String? description,
     String? resourceUri,

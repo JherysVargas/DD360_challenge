@@ -42,7 +42,7 @@ class HttpBaseProvider {
   }) async {
     try {
       final Response response = await _dio.get(
-        "$_baseUrl/$endpoint",
+        "$_baseUrl$endpoint",
         queryParameters: _generateQueryParameters(queryParameters),
       );
       _logger.i(response.statusCode);

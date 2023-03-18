@@ -25,19 +25,7 @@ class HeroInterfaceImpl implements HeroInterface {
   }
 
   @override
-  Future<CharacterResponseModel> getDetailHero(int idHero) async {
-    final Response response = await _httpBaseProvider.get(
-      '/characters/$idHero',
-    );
-
-    if (response.statusCode == 200 && response.data != null) {
-      return CharacterResponseModel.fromJson(response.data);
-    }
-    return const CharacterResponseModel();
-  }
-
-  @override
-  Future<ComicResponseModel> getComitsByHero(int idHero) async {
+  Future<ComicResponseModel> getComicsByHero(int idHero) async {
     final Response response = await _httpBaseProvider.get(
       '/characters/$idHero/comics',
     );

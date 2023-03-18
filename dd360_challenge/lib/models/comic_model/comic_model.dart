@@ -18,14 +18,10 @@ class ComicModel {
     this.images = const [],
   });
 
-  final int? id;
-  final int? digitalId;
-  final String? title;
-  final String? variantDescription;
-  final String? description;
-  final String? format;
+  final int? id, digitalId;
   final ThumbnailModel? thumbnail;
   final List<ThumbnailModel>? images;
+  final String? title, variantDescription, description, format;
 
   ComicModel copyWith({
     int? id,

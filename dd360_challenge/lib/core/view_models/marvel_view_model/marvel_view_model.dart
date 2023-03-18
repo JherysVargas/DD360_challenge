@@ -42,4 +42,48 @@ class MarvelViewModel extends Cubit<MarvelState> {
   void selectedHero(HeroModel hero) {
     emit(state.copyWith(selectedHero: hero));
   }
+
+  Future<void> fetchComicsByHero() async {
+    final ComicResponseModel response =
+        await _heroInterfaceImpl.getComicsByHero(
+      state.selectedHero.id!,
+    );
+
+    if (response.data!.results!.isNotEmpty) {
+      emit(state.copyWith(comics: response.data!.results!));
+    }
+  }
+
+  Future<void> fetchEventsByHero() async {
+    final EventResponseModel response =
+        await _heroInterfaceImpl.getEventsByHero(
+      state.selectedHero.id!,
+    );
+
+    if (response.data!.results!.isNotEmpty) {
+      emit(state.copyWith(events: response.data!.results!));
+    }
+  }
+
+  Future<void> fetchSeriesByHero() async {
+    final SerieResponseModel response =
+        await _heroInterfaceImpl.getSeriesByHero(
+      state.selectedHero.id!,
+    );
+
+    if (response.data!.results!.isNotEmpty) {
+      emit(state.copyWith(series: response.data!.results!));
+    }
+  }
+
+  Future<void> fetchStoriesByHero() async {
+    final StoryResponseModel response =
+        await _heroInterfaceImpl.getStoriesByHero(
+      state.selectedHero.id!,
+    );
+
+    if (response.data!.results!.isNotEmpty) {
+      emit(state.copyWith(stories: response.data!.results!));
+    }
+  }
 }
